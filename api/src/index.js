@@ -21,6 +21,10 @@ const knex = knexLib({
   },
 });
 
+app.get("/", (req, res) => {
+  res.send("Meal Sharing API is running!");
+});
+
 // Routes
 app.get("/my-route", (req, res) => {
   res.send("Hi friend");
@@ -28,8 +32,17 @@ app.get("/my-route", (req, res) => {
 
 app.get("/future-meals", async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal WHERE `when` > NOW()");
-    res.json(meals[0]);
+    const meals = await knex.raw(
+      "SELECT * FROM Meal WHERE `when_date` > NOW()"
+    );
+
+    const result = meals[0];
+
+    if (result.length === 0) {
+      res.status(404).json({ message: "No future meals found." });
+    } else {
+      res.json(result);
+    }
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -37,7 +50,11 @@ app.get("/future-meals", async (req, res) => {
 
 app.get("/past-meals", async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal WHERE `when` < NOW()");
+    const [meals] = await knex.raw("SELECT * FROM Meal WHERE `when` < NOW()");
+    if (!meals || meals.length === 0) {
+      return res.status(404).json({ message: "No meals found" });
+    }
+
     res.json(meals[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -46,7 +63,11 @@ app.get("/past-meals", async (req, res) => {
 
 app.get("/all-meals", async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal ORDER BY id");
+    const [meals] = await knex.raw("SELECT * FROM Meal ORDER BY id");
+    if (!meals || meals.length === 0) {
+      return res.status(404).json({ message: "No meals found" });
+    }
+
     res.json(meals[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -55,11 +76,14 @@ app.get("/all-meals", async (req, res) => {
 
 app.get("/first-meal", async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal ORDER BY id ASC LIMIT 1");
-    if (meals[0].length === 0) {
+    const [meals] = await knex.raw(
+      "SELECT * FROM Meal ORDER BY id ASC LIMIT 1"
+    );
+    if (!meals || meals.length === 0) {
       return res.status(404).json({ message: "No meals found" });
     }
-    res.json(meals[0][0]);
+
+    res.json(meals[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -67,11 +91,15 @@ app.get("/first-meal", async (req, res) => {
 
 app.get("/last-meal", async (req, res) => {
   try {
-    const meals = await knex.raw("SELECT * FROM Meal ORDER BY id DESC LIMIT 1");
-    if (meals[0].length === 0) {
+    const [meals] = await knex.raw(
+      "SELECT * FROM Meal ORDER BY id DESC LIMIT 1"
+    );
+
+    if (!meals || meals.length === 0) {
       return res.status(404).json({ message: "No meals found" });
     }
-    res.json(meals[0][0]);
+
+    res.json(meals[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
