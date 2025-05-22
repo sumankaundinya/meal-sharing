@@ -2,30 +2,110 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import knex from "./database_client.js";
-import nestedRouter from "./routers/nested.js";
+import knexLib from "knex";
 
 const app = express();
+const port = process.env.PORT || 3000;
+
 app.use(cors());
 app.use(bodyParser.json());
 
-const apiRouter = express.Router();
-
-// You can delete this route once you add your own routes
-apiRouter.get("/", async (req, res) => {
-  const SHOW_TABLES_QUERY =
-    process.env.DB_CLIENT === "pg"
-      ? "SELECT * FROM pg_catalog.pg_tables;"
-      : "SHOW TABLES;";
-  const tables = await knex.raw(SHOW_TABLES_QUERY);
-  res.json({ tables });
+const knex = knexLib({
+  client: "mysql2",
+  connection: {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE_NAME,
+  },
 });
 
-// This nested router example can also be replaced with your own sub-router
-apiRouter.use("/nested", nestedRouter);
+app.get("/", (req, res) => {
+  res.send("Meal Sharing API is running!");
+});
 
-app.use("/api", apiRouter);
+// Routes
+app.get("/my-route", (req, res) => {
+  res.send("Hi friend");
+});
 
-app.listen(process.env.PORT, () => {
-  console.log(`API listening on port ${process.env.PORT}`);
+app.get("/future-meals", async (req, res) => {
+  try {
+    const meals = await knex.raw(
+      "SELECT * FROM Meal WHERE `when_date` > NOW()"
+    );
+
+    const result = meals[0];
+
+    if (result.length === 0) {
+      res.status(404).json({ message: "No future meals found." });
+    } else {
+      res.json(result);
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/past-meals", async (req, res) => {
+  try {
+    const [meals] = await knex.raw("SELECT * FROM Meal WHERE `when` < NOW()");
+    if (!meals || meals.length === 0) {
+      return res.status(404).json({ message: "No meals found" });
+    }
+
+    res.json(meals[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/all-meals", async (req, res) => {
+  try {
+    const [meals] = await knex.raw("SELECT * FROM Meal ORDER BY id");
+    if (!meals || meals.length === 0) {
+      return res.status(404).json({ message: "No meals found" });
+    }
+
+    res.json(meals[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/first-meal", async (req, res) => {
+  try {
+    const [meals] = await knex.raw(
+      "SELECT * FROM Meal ORDER BY id ASC LIMIT 1"
+    );
+    if (!meals || meals.length === 0) {
+      return res.status(404).json({ message: "No meals found" });
+    }
+
+    res.json(meals[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/last-meal", async (req, res) => {
+  try {
+    const [meals] = await knex.raw(
+      "SELECT * FROM Meal ORDER BY id DESC LIMIT 1"
+    );
+
+    if (!meals || meals.length === 0) {
+      return res.status(404).json({ message: "No meals found" });
+    }
+
+    res.json(meals[0]);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Starting the server with a message
+app.listen(port, () => {
+  console.log(`Server is listening on http://localhost:${port}`);
 });
