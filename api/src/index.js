@@ -20,10 +20,6 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.get("/my-route", (req, res) => {
-  res.send("Hi friend");
-});
-
 app.get("/future-meals", async (req, res) => {
   try {
     const meals = await knex.raw(
