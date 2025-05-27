@@ -1,5 +1,8 @@
 import express from "express";
 import knex from "../database_client.js";
+import { validate } from "../middleware/validate.js";
+
+import { mealSchema, mealUpdateSchema } from "../validators/mealValidation.js";
 
 const router = express.Router();
 
@@ -13,9 +16,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validate(mealSchema), async (req, res) => {
   try {
-    const [id] = await knex("meal").insert(req.body);
+    const [id] = await knex("meal").insert(req.validatedBody);
     res.status(201).json({ message: "Meal created", id });
   } catch (error) {
     console.error("Error creating meal:", error);
@@ -41,6 +44,11 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
+    const { error } = mealUpdateSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
     const { id } = req.params;
     const updated = await knex("meal").where({ id }).update(req.body);
 

@@ -1,5 +1,11 @@
 import express from "express";
 import knex from "../database_client.js";
+import { validate } from "../middleware/validate.js";
+
+import {
+  reservationSchema,
+  reservationUpdateSchema,
+} from "../validators/reservationValidation.js";
 
 const router = express.Router();
 
@@ -12,10 +18,9 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", validate(reservationSchema), async (req, res) => {
   try {
-    const newReservation = req.body;
-    const [insertedId] = await knex("reservation").insert(newReservation);
+    const [insertedId] = await knex("reservation").insert(req.validatedBody);
     const insertedReservation = await knex("reservation")
       .where({ id: insertedId })
       .first();
@@ -41,21 +46,27 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
+    const { error } = reservationUpdateSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
     const updated = await knex("reservation")
       .where({ id: req.params.id })
       .update(req.body);
     if (!updated) {
       return res.status(404).json({ error: "Reservation not found" });
     }
+
     const updatedReservation = await knex("reservation")
       .where({ id: req.params.id })
       .first();
+
     res.json(updatedReservation);
   } catch (err) {
     res.status(500).json({ error: "Failed to update reservation" });
   }
 });
-
 router.delete("/:id", async (req, res) => {
   try {
     const deleted = await knex("reservation")

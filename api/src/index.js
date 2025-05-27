@@ -1,27 +1,19 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
-import knexLib from "knex";
 import mealsRouter from "./routers/meals.js";
 import reservationsRouter from "./routers/reservations.js";
 import knex from "./database_client.js";
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cors());
+
 app.use("/api/meals", mealsRouter);
 app.use("/api/reservations", reservationsRouter);
 
-app.use(cors());
-app.use(bodyParser.json());
-
 app.get("/", (req, res) => {
   res.send("Meal Sharing API is running!");
-});
-
-// Routes
-app.get("/my-route", (req, res) => {
-  res.send("Hi friend");
 });
 
 app.get("/future-meals", async (req, res) => {
