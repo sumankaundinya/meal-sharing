@@ -1,33 +1,19 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import bodyParser from "body-parser";
-import knexLib from "knex";
-
+import mealsRouter from "./routers/meals.js";
+import reservationsRouter from "./routers/reservations.js";
+import knex from "./database_client.js";
 const app = express();
 const port = process.env.PORT || 3000;
-
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
 
-const knex = knexLib({
-  client: "mysql2",
-  connection: {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE_NAME,
-  },
-});
+app.use("/api/meals", mealsRouter);
+app.use("/api/reservations", reservationsRouter);
 
 app.get("/", (req, res) => {
   res.send("Meal Sharing API is running!");
-});
-
-// Routes
-app.get("/my-route", (req, res) => {
-  res.send("Hi friend");
 });
 
 app.get("/future-meals", async (req, res) => {
