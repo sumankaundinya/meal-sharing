@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import mealsRouter from "./routers/meals.js";
 import reservationsRouter from "./routers/reservations.js";
+import reviewsRouter from "./routers/reviews.js";
 import knex from "./database_client.js";
 const app = express();
 const port = process.env.PORT || 3000;
@@ -11,7 +12,7 @@ app.use(cors());
 
 app.use("/api/meals", mealsRouter);
 app.use("/api/reservations", reservationsRouter);
-
+app.use("/api/reviews", reviewsRouter);
 app.get("/", (req, res) => {
   res.send("Meal Sharing API is running!");
 });
