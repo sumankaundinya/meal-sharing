@@ -8,7 +8,53 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const meals = await knex("meal").select("*");
+    let query = knex("meal").select("meal.*");
+
+    const {
+      maxPrice,
+      availableReservations,
+      title,
+      dateAfter,
+      dateBefore,
+      limit,
+      sortKey,
+      sortDir,
+    } = req.query;
+
+    if (maxPrice) {
+      query.where("price", "<=", Number(maxPrice));
+    }
+
+    if (title) {
+      query.where("title", "like", `%${title}%`);
+    }
+
+    if (dateAfter) {
+      query.where("when_date", ">", dateAfter);
+    }
+
+    if (dateBefore) {
+      query.where("when_date", "<", dateBefore);
+    }
+
+    if (availableReservations) {
+      query
+        .leftJoin("reservation", "meal.id", "reservation.meal_id")
+        .groupBy("meal.id")
+        .havingRaw(
+          `${availableReservations === "true" ? "" : "NOT"} (meal.max_reservations > COALESCE(SUM(reservation.number_of_guests), 0))`
+        );
+    }
+
+    if (sortKey && ["when", "max_reservations", "price"].includes(sortKey)) {
+      query.orderBy(sortKey, sortDir === "desc" ? "desc" : "asc");
+    }
+
+    if (limit) {
+      query.limit(Number(limit));
+    }
+
+    const meals = await query;
     res.json(meals);
   } catch (error) {
     console.error("Error fetching meals:", error);
