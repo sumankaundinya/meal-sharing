@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
+import Meal from "./Meal";
+import "./MealList.css";
 const MealsList = () => {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,13 +36,11 @@ const MealsList = () => {
       {meals.length === 0 ? (
         <p>No meals found.</p>
       ) : (
-        meals.map((meal) => (
-          <div key={meal.id}>
-            <h3>{meal.title}</h3>
-            <p>{meal.description}</p>
-            <p>Price: ${meal.price}</p>
-          </div>
-        ))
+        <div className="meals-grid">
+          {meals.map((meal) => (
+            <Meal key={meal.id} meal={meal} />
+          ))}
+        </div>
       )}
     </div>
   );
