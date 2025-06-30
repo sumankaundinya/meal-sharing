@@ -1,0 +1,23 @@
+.meal-card {
+  background-color: #fdfdfd;
+  border: 1px solid #e3e3e3;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.meal-card:hover {
+  transform: translateY(-4px);
+}
+
+.meal-card h3 {
+  margin-top: 0;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.meal-card p {
+  margin: 4px 0;
+  color: #555;
+}
