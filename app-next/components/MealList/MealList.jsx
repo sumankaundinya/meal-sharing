@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Meal from "./Meal";
 import "./MealList.css";
-const MealsList = () => {
+const MealsList = ({ limit }) => {
   const [meals, setMeals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ const MealsList = () => {
       }
       const data = await response.json();
 
-      setMeals(data);
+      setMeals(limit ? data.slice(0, limit) : data);
     } catch (error) {
       setError("Failed to fetch meals. Please try again.");
     } finally {
@@ -26,7 +26,7 @@ const MealsList = () => {
   };
   useEffect(() => {
     fetchMeals();
-  }, []);
+  }, [limit]);
 
   if (loading) {
     return <p>Loading meals...</p>;

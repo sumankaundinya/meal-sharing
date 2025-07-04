@@ -1,10 +1,14 @@
 "use client";
 import React from "react";
+import Link from "next/link";
 import "./Meal.css";
+
 const Meal = ({ meal }) => {
   return (
     <div className="meal-card">
-      <h3>{meal.title}</h3>
+      <h3>
+        <Link href={`/meals/${meal.id}`}>{meal.title}</Link>
+      </h3>
       <p>{meal.description}</p>
       <p>
         <strong>Price:</strong> ${meal.price}
