@@ -10,10 +10,16 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    const reviews = await knex("review").select("*");
+    const mealId = req.query.meal_id;
+    let query = knex("review").select("*");
+
+    if (mealId) {
+      query = query.where({ meal_id: mealId });
+    }
+
+    const reviews = await query;
     res.json(reviews);
-  } catch (error) {
-    console.error("Error fetching reviews:", error);
+  } catch (err) {
     res.status(500).json({ error: "Failed to fetch reviews" });
   }
 });
@@ -32,10 +38,10 @@ router.get("/meals/:meal_id/reviews", async (req, res) => {
 router.post("/", validate(reviewSchema), async (req, res) => {
   try {
     const [id] = await knex("review").insert(req.validatedBody);
-    res.status(201).json({ message: "Review added", id });
-  } catch (error) {
-    console.error("Error creating review:", error);
-    res.status(500).json({ error: "Failed to add review" });
+    const inserted = await knex("review").where({ id }).first();
+    res.status(201).json(inserted);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to create review" });
   }
 });
 

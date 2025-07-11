@@ -1,0 +1,24 @@
+.container {
+  padding: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.noAvailable {
+  color: red;
+  font-weight: bold;
+}
+
+.details p {
+  margin: 0.5rem 0;
+}
+
+.sectionTitle {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
