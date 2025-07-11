@@ -8,7 +8,7 @@ const HomePage = () => {
       style={{
         padding: "2rem",
         minHeight: "100vh",
-        backgroundImage: "url(/wallpaper.jpg)",
+        backgroundImage: `url("https://images.unsplash.com/photo-1606787366850-de6330128bfc")`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -48,6 +48,30 @@ const HomePage = () => {
         }}
       >
         <p>&copy; {new Date().getFullYear()} Meal Sharing App</p>
+        <div style={{ marginTop: "1rem" }}>
+          <a href="mailto:info@mealsharing.com" style={{ margin: "0 1rem" }}>
+            Email
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ margin: "0 1rem" }}
+          >
+            Facebook
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ margin: "0 1rem" }}
+          >
+            LinkedIn
+          </a>
+          <a href="tel:+1234567890" style={{ margin: "0 1rem" }}>
+            Telephone
+          </a>
+        </div>
       </footer>
     </div>
   );
