@@ -80,8 +80,12 @@ router.get("/:id", async (req, res) => {
     if (!meal) {
       return res.status(404).json({ error: "Meal not found" });
     }
+    const reservations = await knex("reservation").where({ meal_id: id });
 
-    res.json(meal);
+    res.json({
+      ...meal,
+      reservations,
+    });
   } catch (error) {
     console.error("Error fetching meal:", error);
     res.status(500).json({ error: "Failed to fetch meal" });
