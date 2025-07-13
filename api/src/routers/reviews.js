@@ -37,6 +37,7 @@ router.get("/meals/:meal_id/reviews", async (req, res) => {
 
 router.post("/", validate(reviewSchema), async (req, res) => {
   try {
+    console.log("Validated review body:", req.validatedBody);
     const [id] = await knex("review").insert(req.validatedBody);
     const inserted = await knex("review").where({ id }).first();
     res.status(201).json(inserted);

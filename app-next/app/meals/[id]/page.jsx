@@ -14,6 +14,11 @@ export default function MealDetailPage() {
   const [meal, setMeal] = useState(null);
   const [loading, setLoading] = useState(true);
   const [available, setAvailable] = useState(false);
+  const [reviewKey, setReviewKey] = useState(0);
+
+  const refreshReviews = () => {
+    setReviewKey((prev) => prev + 1);
+  };
 
   const fetchMeal = useCallback(async () => {
     try {
@@ -25,7 +30,10 @@ export default function MealDetailPage() {
       setMeal({ ...data, booked });
       setAvailable(data.max_reservations > booked);
     } catch (err) {
-      console.error("Failed to fetch meal:", err);
+      setMeal(null);
+      setLoading(false);
+
+      alert("Failed to fetch meal details. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -98,14 +106,8 @@ export default function MealDetailPage() {
           <p className={styles.noAvailable}>No available reservations</p>
         )}
 
-        <h2 className={styles.sectionTitle} style={{ marginTop: "2rem" }}>
-          Reviews
-        </h2>
-        <ReviewForm
-          mealId={meal.id}
-          onSuccess={() => window.location.reload()}
-        />
-        <ReviewList mealId={meal.id} />
+        <ReviewForm mealId={meal.id} onSuccess={refreshReviews} />
+        <ReviewList key={reviewKey} mealId={meal.id} />
       </div>
     </div>
   );

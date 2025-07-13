@@ -14,7 +14,33 @@ export default function NavBar() {
   });
 
   return (
-    <nav style={{ padding: "1rem", background: "#f2f2f2", textAlign: "right" }}>
+    <nav
+      style={{
+        padding: "1rem",
+        background: "#f2f2f2",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-end",
+      }}
+    >
+      <div
+        style={{ marginRight: "auto", display: "flex", alignItems: "center" }}
+      >
+        <img
+          src="/images/meals/logo.jpg"
+          alt="MealSharing Logo"
+          style={{
+            width: "40px",
+            height: "40px",
+            marginRight: "0.75rem",
+            objectFit: "cover",
+            borderRadius: "8px",
+          }}
+        />
+        <span style={{ fontWeight: "bold", fontSize: "1.2rem", color: "#333" }}>
+          MealSharing App
+        </span>
+      </div>
       <Link href="/" style={linkStyle("/")}>
         HOME
       </Link>

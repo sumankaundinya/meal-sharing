@@ -46,37 +46,105 @@ const ReservationForm = ({ mealId, onSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: "2rem" }}>
-      <h3>Make a Reservation</h3>
-      <div>
-        <label>Name: </label>
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        maxWidth: "400px",
+        margin: "2rem auto",
+        padding: "2rem",
+        borderRadius: "8px",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+        background: "#fff",
+        display: "flex",
+        flexDirection: "column",
+        gap: "1.2rem",
+      }}
+    >
+      <h3 style={{ textAlign: "center", marginBottom: "1rem", color: "#333" }}>
+        Make a Reservation
+      </h3>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+        <label htmlFor="name" style={{ fontWeight: "500", color: "#555" }}>
+          Name:
+        </label>
         <input
+          id="name"
           type="text"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
+          style={{
+            padding: "0.6rem",
+            borderRadius: "4px",
+            border: "1px solid #ccc",
+            fontSize: "1rem",
+          }}
         />
       </div>
-      <div>
-        <label>Email: </label>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+        <label htmlFor="email" style={{ fontWeight: "500", color: "#555" }}>
+          Email:
+        </label>
         <input
+          id="email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          style={{
+            padding: "0.6rem",
+            borderRadius: "4px",
+            border: "1px solid #ccc",
+            fontSize: "1rem",
+          }}
         />
       </div>
-      <div>
-        <label>Phone: </label>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+        <label htmlFor="phone" style={{ fontWeight: "500", color: "#555" }}>
+          Phone:
+        </label>
         <input
+          id="phone"
           type="tel"
           required
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
+          style={{
+            padding: "0.6rem",
+            borderRadius: "4px",
+            border: "1px solid #ccc",
+            fontSize: "1rem",
+          }}
         />
       </div>
-      <button type="submit">Book Seat</button>
-      {message && <p>{message}</p>}
+      <button
+        type="submit"
+        style={{
+          padding: "0.8rem",
+          borderRadius: "4px",
+          border: "none",
+          background: "#0070f3",
+          color: "#fff",
+          fontWeight: "600",
+          fontSize: "1rem",
+          cursor: "pointer",
+          transition: "background 0.2s",
+        }}
+      >
+        Book Seat
+      </button>
+      {message && (
+        <p
+          style={{
+            marginTop: "1rem",
+            textAlign: "center",
+            color: message.startsWith("Error") ? "#d32f2f" : "#388e3c",
+            fontWeight: "500",
+          }}
+        >
+          {message}
+        </p>
+      )}
     </form>
   );
 };
