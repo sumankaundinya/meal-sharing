@@ -65,50 +65,28 @@ const MealsList = ({ limit }) => {
   }, [meals, sortBy]);
 
   return (
-    <div
-      style={{
-        background: "rgba(255,255,255,0.85)",
-        padding: "2rem",
-        borderRadius: "12px",
-      }}
-    >
+    <div className="meals-container">
       <h2>Meals</h2>
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2rem",
-          marginBottom: "1.5rem",
-          flexWrap: "wrap",
-        }}
-      >
-        <div>
+      <div className="meals-header">
+        <div className="search-box">
+          <button onClick={handleSearch}> SEARCH </button>
+
           <input
             type="text"
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             placeholder="Search meals by title..."
-            style={{ padding: "0.5rem", marginRight: "0.5rem" }}
           />
-          <button onClick={handleSearch} style={{ padding: "0.5rem 1rem" }}>
-            SEARCH
-          </button>
         </div>
-        <div>
-          <button
-            htmlFor="sort"
-            style={{ padding: "0.5rem 1rem", marginRight: "0.5rem" }}
-          >
-            SORT BY
-          </button>
+
+        <div className="sort-box">
           <select
             id="sort"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            style={{ padding: "0.5rem" }}
           >
-            <option value="">-- Select --</option>
+            <option value="">-- Sort By --</option>
             <option value="price_asc">Price: Low to High</option>
             <option value="price_desc">Price: High to Low</option>
             <option value="title_asc">Title: A to Z</option>
@@ -124,14 +102,7 @@ const MealsList = ({ limit }) => {
       ) : sortedMeals.length === 0 ? (
         <p>No meals found.</p>
       ) : (
-        <div
-          className="meals-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
+        <div className="meals-grid">
           {sortedMeals.map((meal) => (
             <Meal key={meal.id} meal={meal} />
           ))}

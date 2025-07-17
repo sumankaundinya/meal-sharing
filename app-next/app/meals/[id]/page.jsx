@@ -32,7 +32,6 @@ export default function MealDetailPage() {
     } catch (err) {
       setMeal(null);
       setLoading(false);
-
       alert("Failed to fetch meal details. Please try again later.");
     } finally {
       setLoading(false);
@@ -52,36 +51,12 @@ export default function MealDetailPage() {
       style={{
         backgroundImage:
           "url('https://images.unsplash.com/photo-1606787366850-de6330128bfc')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
       }}
     >
-      <div
-        className={styles.overlay}
-        style={{
-          background: "rgba(255,255,255,0.95)",
-          borderRadius: "16px",
-          boxShadow: "0 4px 24px rgba(0,0,0,0.15)",
-          padding: "2rem",
-          maxWidth: "500px",
-          width: "100%",
-          margin: "2rem",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <h1 className={styles.title} style={{ textAlign: "center" }}>
-          {meal.title}
-        </h1>
-        <div
-          className={styles.details}
-          style={{ width: "100%", marginBottom: "1rem" }}
-        >
+      <div className={styles.overlay}>
+        <h1 className={styles.title}>{meal.title}</h1>
+
+        <div className={styles.details}>
           <p>{meal.description}</p>
           <p>
             <strong>Price:</strong> ${meal.price}

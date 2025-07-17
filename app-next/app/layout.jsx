@@ -1,5 +1,5 @@
 import "./globals.css";
-import NavBar from "@/components/NavBar";
+import NavBar from "@/components/NavBar/NavBar";
 
 export const metadata = {
   title: "Meal Sharing",
