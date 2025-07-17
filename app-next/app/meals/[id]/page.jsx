@@ -1,5 +1,5 @@
 "use client";
-import styles from "./Page.module.css";
+import styles from "./page.module.css";
 
 import { useEffect, useState, useCallback } from "react";
 import { useParams } from "next/navigation";
