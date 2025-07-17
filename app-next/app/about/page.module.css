@@ -1,0 +1,52 @@
+.aboutPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("https://images.unsplash.com/photo-1606787366850-de6330128bfc");
+  background-size: cover;
+  background-position: center;
+}
+
+.aboutContainer {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  max-width: 400px;
+  text-align: center;
+}
+
+.aboutContainer h1 {
+  margin-bottom: 1rem;
+}
+
+.aboutContainer h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.aboutContainer p {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.aboutContainer ul {
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 1rem;
+}
+
+.aboutContainer li {
+  margin-bottom: 0.5rem;
+}
+
+.browseLink {
+  color: #0070f3;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.browseLink:hover {
+  text-decoration: underline;
+}

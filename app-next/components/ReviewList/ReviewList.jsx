@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import "./ReviewList.css";
 
 const ReviewList = ({ mealId }) => {
   const [reviews, setReviews] = useState([]);
@@ -27,36 +28,19 @@ const ReviewList = ({ mealId }) => {
   if (reviews.length === 0) return <p>No reviews yet.</p>;
 
   return (
-    <div style={{ marginTop: "2rem" }}>
-      <h3 style={{ marginBottom: "1rem" }}>Reviews</h3>
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+    <div className="review-list-container">
+      <h3 className="review-list-title">Reviews</h3>
+      <ul className="review-list">
         {reviews.map((review, idx) => (
           <li
             key={review.id}
-            style={{
-              display: "flex",
-              flexDirection: idx % 2 === 0 ? "row" : "row-reverse",
-              alignItems: "flex-start",
-              marginBottom: "1.5rem",
-            }}
+            className={`review-item ${
+              idx % 2 === 0 ? "row-normal" : "row-reverse"
+            }`}
           >
-            <div
-              style={{
-                background: "#f9f9f9",
-                borderRadius: "8px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-                padding: "1rem",
-                minWidth: "220px",
-                maxWidth: "350px",
-                border: "1px solid #eee",
-              }}
-            >
-              <p style={{ margin: 0, fontWeight: "bold", color: "#ff9800" }}>
-                {review.rating} stars
-              </p>
-              <p style={{ margin: "0.5rem 0 0 0", color: "#333" }}>
-                {review.comment}
-              </p>
+            <div className="review-card">
+              <p className="review-rating">{review.rating} stars</p>
+              <p className="review-comment">{review.comment}</p>
             </div>
           </li>
         ))}

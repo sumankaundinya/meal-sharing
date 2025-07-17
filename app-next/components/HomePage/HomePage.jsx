@@ -12,6 +12,7 @@ const HomePage = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        overflowY: "auto",
       }}
     >
       <header

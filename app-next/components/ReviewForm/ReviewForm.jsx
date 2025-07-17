@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import "./ReviewForm.css";
 
 const ReviewForm = ({ mealId, onSuccess }) => {
   const [comment, setComment] = useState("");
@@ -41,47 +42,21 @@ const ReviewForm = ({ mealId, onSuccess }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        marginTop: "2rem",
-        maxWidth: "400px",
-        padding: "2rem",
-        borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-        background: "#fff",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1.2rem",
-      }}
-    >
-      <h3 style={{ margin: 0, fontSize: "1.3rem", color: "#333" }}>
-        Leave a Review
-      </h3>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <label htmlFor="comment" style={{ fontWeight: 500, color: "#444" }}>
-          Comment:
-        </label>
+    <form className="review-form" onSubmit={handleSubmit}>
+      <h3 className="review-title">Leave a Review</h3>
+
+      <div className="review-field">
+        <label htmlFor="comment">Comment:</label>
         <textarea
           id="comment"
           required
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          style={{
-            resize: "vertical",
-            minHeight: "60px",
-            padding: "0.7rem",
-            borderRadius: "6px",
-            border: "1px solid #ccc",
-            fontSize: "1rem",
-            outline: "none",
-          }}
         />
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <label htmlFor="rating" style={{ fontWeight: 500, color: "#444" }}>
-          Stars (1-5):
-        </label>
+
+      <div className="review-field">
+        <label htmlFor="rating">Stars (1-5):</label>
         <input
           id="rating"
           type="number"
@@ -90,42 +65,20 @@ const ReviewForm = ({ mealId, onSuccess }) => {
           required
           value={rating}
           onChange={(e) => setRating(e.target.value)}
-          style={{
-            width: "80px",
-            padding: "0.5rem",
-            borderRadius: "6px",
-            border: "1px solid #ccc",
-            fontSize: "1rem",
-            outline: "none",
-          }}
         />
       </div>
-      <button
-        type="submit"
-        style={{
-          background: "#0070f3",
-          color: "#fff",
-          border: "none",
-          borderRadius: "6px",
-          padding: "0.8rem",
-          fontWeight: 600,
-          fontSize: "1rem",
-          cursor: "pointer",
-          transition: "background 0.2s",
-        }}
-      >
+
+      <button type="submit" className="review-button">
         Submit Review
       </button>
+
       {status && (
         <p
-          style={{
-            margin: 0,
-            color:
-              status.startsWith("Error") || status.startsWith("Network")
-                ? "#d32f2f"
-                : "#388e3c",
-            fontWeight: 500,
-          }}
+          className={`review-status ${
+            status.startsWith("Error") || status.startsWith("Network")
+              ? "error"
+              : "success"
+          }`}
         >
           {status}
         </p>

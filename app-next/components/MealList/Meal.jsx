@@ -27,29 +27,25 @@ const Meal = ({ meal }) => {
         src={getImageForMeal(meal.title)}
         alt={meal.title}
         className="meal-image"
-        style={{
-          width: "100%",
-          height: "auto",
-          marginBottom: "1rem",
-          borderRadius: "8px",
-        }}
       />
-      <h3>
-        <Link href={`/meals/${meal.id}`}>{meal.title}</Link>
-      </h3>
-      <p>{meal.description}</p>
-      <p>
-        <strong>Price:</strong> ${meal.price}
-      </p>
-      <p>
-        <strong>Location:</strong> {meal.location}
-      </p>
-      <p>
-        <strong>When:</strong> {new Date(meal.when_date).toLocaleString()}
-      </p>
-      <p>
-        <strong>Max guests:</strong> {meal.max_reservations}
-      </p>
+      <div className="meal-content">
+        <h3 className="meal-title">
+          <Link href={`/meals/${meal.id}`}>{meal.title}</Link>
+        </h3>
+        <p>{meal.description}</p>
+        <p>
+          <strong>Price:</strong> ${meal.price}
+        </p>
+        <p>
+          <strong>Location:</strong> {meal.location}
+        </p>
+        <p>
+          <strong>When:</strong> {new Date(meal.when_date).toLocaleString()}
+        </p>
+        <p>
+          <strong>Max guests:</strong> {meal.max_reservations}
+        </p>
+      </div>
     </div>
   );
 };
