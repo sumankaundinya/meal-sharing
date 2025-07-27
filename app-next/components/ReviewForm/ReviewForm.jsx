@@ -6,6 +6,7 @@ const ReviewForm = ({ mealId, onSuccess }) => {
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(1);
   const [status, setStatus] = useState(null);
+  const [submittedReview, setSubmittedReview] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +32,8 @@ const ReviewForm = ({ mealId, onSuccess }) => {
         setStatus("Review submitted!");
         setComment("");
         setRating(1);
+        setSubmittedReview({ comment, rating });
+
         if (onSuccess) onSuccess();
       } else {
         const err = await response.json();
@@ -82,6 +85,18 @@ const ReviewForm = ({ mealId, onSuccess }) => {
         >
           {status}
         </p>
+      )}
+      {submittedReview && (
+        <div className="submitted-review">
+          <p>
+            <strong>Your Review:</strong>
+          </p>
+          <p>{submittedReview.comment}</p>
+          <p>
+            {"⭐".repeat(submittedReview.rating)} ({submittedReview.rating}{" "}
+            stars)
+          </p>
+        </div>
       )}
     </form>
   );

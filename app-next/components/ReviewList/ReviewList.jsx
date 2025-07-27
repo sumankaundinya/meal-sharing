@@ -6,6 +6,12 @@ const ReviewList = ({ mealId }) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Helper function to render stars as symbols
+  const renderStars = (count) => {
+    // Return a string of star symbols equal to count (1 to 5)
+    return "⭐️".repeat(count);
+  };
+
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -39,8 +45,8 @@ const ReviewList = ({ mealId }) => {
             }`}
           >
             <div className="review-card">
-              <p className="review-rating">{review.rating} stars</p>
               <p className="review-comment">{review.comment}</p>
+              <p className="review-rating">{renderStars(review.rating)}</p>
             </div>
           </li>
         ))}
