@@ -67,3 +67,30 @@
 .message {
   margin: auto;
 }
+
+/* For Mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .seeAllMealsButton {
+    width: 100%;
+    max-width: 300px;
+    font-size: 0.95rem;
+  }
+
+  .footerLinks a {
+    display: block;
+    margin: 0.5rem 0;
+  }
+
+  .footer {
+    padding: 0.5rem;
+  }
+}
