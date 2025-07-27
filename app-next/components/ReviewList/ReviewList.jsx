@@ -6,10 +6,31 @@ const ReviewList = ({ mealId }) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Helper function to render stars as symbols
-  const renderStars = (count) => {
-    // Return a string of star symbols equal to count (1 to 5)
-    return "⭐️".repeat(count);
+  const renderStars = (count) => "⭐️".repeat(count);
+
+  // Handle delete
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this review?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/reviews/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to delete review");
+
+      // Remove deleted review from state
+      setReviews((prev) => prev.filter((r) => r.id !== id));
+    } catch (err) {
+      console.error("Error deleting review:", err);
+      alert("Failed to delete review.");
+    }
   };
 
   useEffect(() => {
@@ -47,6 +68,12 @@ const ReviewList = ({ mealId }) => {
             <div className="review-card">
               <p className="review-comment">{review.comment}</p>
               <p className="review-rating">{renderStars(review.rating)}</p>
+              <button
+                className="delete-review-button"
+                onClick={() => handleDelete(review.id)}
+              >
+                Delete
+              </button>
             </div>
           </li>
         ))}
