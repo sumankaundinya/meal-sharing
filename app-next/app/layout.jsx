@@ -10,6 +10,7 @@ const poppins = Poppins({
 export const metadata = {
   title: "Meal Sharing",
   description: "Share and enjoy delicious meals together!",
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({ children }) {
