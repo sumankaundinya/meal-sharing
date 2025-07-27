@@ -1,37 +1,50 @@
 .navbar {
-  padding: 1rem;
+  padding: 0.75rem 1rem;
   background: #f2f2f2;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  position: relative;
 }
 
 .navbar-logo {
-  margin-right: auto;
   display: flex;
   align-items: center;
 }
 
 .navbar-logo img {
-  width: 40px;
-  height: 40px;
-  margin-right: 0.75rem;
+  width: 36px;
+  height: 36px;
+  margin-right: 0.5rem;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .navbar-logo span {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: #333;
 }
 
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Desktop nav links */
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
 .navbar-links a {
-  margin-right: 1rem;
   text-decoration: none;
   font-weight: bold;
   color: #333;
-  transition: color 0.2s ease;
+  font-size: 1rem;
 }
 
 .navbar-links a:hover {
@@ -40,4 +53,35 @@
 
 .navbar-links a.active {
   color: blue;
+}
+
+/* ========== Responsive Styles ========== */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background: white;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px;
+    border-radius: 6px;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    margin: 0.5rem 0;
+    width: 100%;
+  }
 }

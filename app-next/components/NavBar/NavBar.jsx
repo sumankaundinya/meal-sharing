@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import "./NavBar.css";
 
 export default function NavBar() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <nav className="navbar">
@@ -13,7 +15,16 @@ export default function NavBar() {
         <img src="/images/meals/logo.jpg" alt="MealSharing Logo" />
         <span>MealSharing</span>
       </div>
-      <div className="navbar-links">
+
+      <button
+        className="hamburger"
+        onClick={() => setMenuOpen((prev) => !prev)}
+        aria-label="Toggle navigation"
+      >
+        ☰
+      </button>
+
+      <div className={`navbar-links ${menuOpen ? "open" : ""}`}>
         <Link href="/" className={pathname === "/" ? "active" : ""}>
           HOME
         </Link>
