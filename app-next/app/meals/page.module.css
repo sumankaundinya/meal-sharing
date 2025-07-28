@@ -1,16 +1,58 @@
 .container {
   padding: 2rem;
   min-height: 100vh;
-  max-height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background-image: url("https://images.unsplash.com/photo-1606787366850-de6330128bfc");
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 .title {
-  color: #fff;
-  text-shadow: 2px 2px 8px #000;
+  text-align: center;
   margin-bottom: 1.5rem;
+  color: white;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+}
+
+/* Search Box Styles */
+.searchBox input {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  border-radius: 8px;
+  border: 1.5px solid #ddd;
+  height: auto;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchBox input:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 5px rgba(0, 112, 243, 0.3);
+  outline: none;
+}
+
+/* Sort Box Styles */
+.sortBox select {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1.5px solid #ddd;
+  background-color: #fff;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  color: grey;
+  height: auto;
+}
+
+.sortBox select:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 5px rgba(0, 112, 243, 0.3);
+  outline: none;
 }

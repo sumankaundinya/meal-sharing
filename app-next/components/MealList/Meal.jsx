@@ -40,7 +40,15 @@ const Meal = ({ meal }) => {
           <strong>Location:</strong> {meal.location}
         </p>
         <p>
-          <strong>When:</strong> {new Date(meal.when_date).toLocaleString()}
+          <strong>When:</strong>{" "}
+          {new Date(meal.when_date).toLocaleString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour12: false,
+          })}
         </p>
         <p>
           <strong>Max guests:</strong> {meal.max_reservations}

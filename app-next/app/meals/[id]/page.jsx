@@ -48,10 +48,7 @@ export default function MealDetailPage() {
   return (
     <div
       className={styles.container}
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1606787366850-de6330128bfc')",
-      }}
+      
     >
       <div className={styles.overlay}>
         <h1 className={styles.title}>{meal.title}</h1>

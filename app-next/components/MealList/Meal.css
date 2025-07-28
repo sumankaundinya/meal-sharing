@@ -1,7 +1,7 @@
 .meal-card {
   width: 100%;
-  max-width: 350px; /* Prevent card from becoming too wide */
-  margin: 0 auto; /* Center it inside grid */
+  max-width: 350px;
+  margin: 0 auto;
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;

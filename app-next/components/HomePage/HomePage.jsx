@@ -3,7 +3,14 @@ import MealsList from "../MealList/MealList";
 import Link from "next/link";
 import styles from "./HomePage.module.css";
 
-const HomePage = () => {
+const HomePage = async () => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals`, {
+    cache: "no-store", // always gets fresh data
+  });
+
+  const allMeals = await res.json();
+  const topThreeMeals = allMeals.slice(0, 3);
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -11,7 +18,7 @@ const HomePage = () => {
         <p>Discover and book delicious homemade meals near you.</p>
       </header>
 
-      <MealsList limit={3} />
+      <MealsList meals={topThreeMeals} />
 
       <div className={styles.seeAllMeals}>
         <Link href="/meals">

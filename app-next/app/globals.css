@@ -6,4 +6,10 @@ body,
   height: 100%;
   width: 100%;
   font-family: "Poppins", sans-serif;
+
+  background-image: url("/images/meals/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
