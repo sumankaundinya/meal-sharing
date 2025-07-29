@@ -5,7 +5,7 @@ import styles from "./HomePage.module.css";
 
 const HomePage = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/meals`, {
-    cache: "no-store", // always gets fresh data
+    cache: "no-store", 
   });
 
   const allMeals = await res.json();

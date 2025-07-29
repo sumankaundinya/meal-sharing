@@ -25,15 +25,24 @@ export default function NavBar() {
       </button>
 
       <div className={`navbar-links ${menuOpen ? "open" : ""}`}>
-        <Link href="/" className={pathname === "/" ? "active" : ""}>
+        <Link
+          href="/"
+          className={pathname === "/" ? "active" : ""}
+          onClick={() => setMenuOpen(false)}
+        >
           HOME
         </Link>
-        <Link href="/about" className={pathname === "/about" ? "active" : ""}>
+        <Link
+          href="/about"
+          className={pathname === "/about" ? "active" : ""}
+          onClick={() => setMenuOpen(false)}
+        >
           ABOUT
         </Link>
         <Link
           href="/contact"
           className={pathname === "/contact" ? "active" : ""}
+          onClick={() => setMenuOpen(false)}
         >
           CONTACT
         </Link>
