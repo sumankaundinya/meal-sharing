@@ -1,19 +1,23 @@
 .aboutPage {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 
+  /* keep background image settings */
   background-size: cover;
   background-position: center;
+  padding: 3rem 2rem;
+  color: black; /* optional: for better readability if background is dark */
 }
 
 .aboutContainer {
-  background: rgba(255, 255, 255, 0.9);
-  padding: 2rem 3rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
-  max-width: 400px;
+  background: none; /* remove card background */
+  padding: 0; /* remove extra padding */
+  border-radius: 0;
+  box-shadow: none; /* remove shadow */
+  max-width: 800px; /* wider layout */
   text-align: center;
 }
 
@@ -28,7 +32,7 @@
 
 .aboutContainer p {
   margin-bottom: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .aboutContainer ul {
@@ -42,7 +46,7 @@
 }
 
 .browseLink {
-  color: #0070f3;
+  color: #ff6b35;
   font-weight: bold;
   text-decoration: none;
 }

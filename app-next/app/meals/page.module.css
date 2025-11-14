@@ -10,9 +10,24 @@
 .title {
   text-align: center;
   margin-bottom: 1.5rem;
+  color: black;
+}
+.buttonLink {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #ff6b35;
   color: white;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.buttonLink:hover {
+  background-color: #ff4500;
+  transform: scale(1.05);
+}
 .controls {
   display: flex;
   flex-wrap: wrap;
@@ -20,7 +35,19 @@
   margin-bottom: 1.5rem;
   justify-content: center;
 }
-
+.button {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #ff6b35;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  height: auto;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
 /* Search Box Styles */
 .searchBox input {
   padding: 0.6rem 1rem;
@@ -41,6 +68,7 @@
 
 /* Sort Box Styles */
 .sortBox select {
+  font-family: poppins;
   padding: 0.6rem 1rem;
   border-radius: 8px;
   border: 1.5px solid #ddd;
@@ -55,4 +83,11 @@
   border-color: #0070f3;
   box-shadow: 0 0 5px rgba(0, 112, 243, 0.3);
   outline: none;
+}
+.aiContainer {
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center; /* vertical center (if you give height) */
+  width: 100%;
+  margin: 2rem 0; /* spacing from header and controls */
 }

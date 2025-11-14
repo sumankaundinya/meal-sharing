@@ -1,7 +1,9 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
 import MealList from "@/components/MealList/MealList";
+import AIRecommendations from "@/components/AIRecommendations/AIRecommendations";
 import styles from "./page.module.css";
+import Link from "next/link";
 
 export default function AllMealsPage() {
   const [meals, setMeals] = useState([]);
@@ -9,6 +11,18 @@ export default function AllMealsPage() {
   const [error, setError] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const [userRole, setUserRole] = useState(null);
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    setUserRole(role);
+  }, []);
+  // Example user preferences
+  const userPreferences = {
+    dietary: "Indian",
+    favoriteCuisine: "Indian",
+    includeIngredients: ["paneer", "chicken", "naan"],
+    avoidIngredients: ["pasta", "cheese", "beef"],
+  };
 
   useEffect(() => {
     const fetchMeals = async () => {
@@ -26,6 +40,7 @@ export default function AllMealsPage() {
     fetchMeals();
   }, []);
 
+  // Filter and sort meals based on search and sort controls
   const filteredAndSortedMeals = useMemo(() => {
     let filtered = meals.filter((meal) =>
       meal.title.toLowerCase().includes(searchText.toLowerCase())
@@ -49,11 +64,61 @@ export default function AllMealsPage() {
     return filtered;
   }, [meals, searchText, sortBy]);
 
+  // Generate recommendations
+  const recommendedMeals = useMemo(() => {
+    if (!meals || meals.length === 0) return [];
+
+    return meals.filter((meal) => {
+      const title = meal.title.toLowerCase();
+      const description = meal.description.toLowerCase();
+
+      const dietaryMatch =
+        userPreferences.dietary &&
+        (title.includes(userPreferences.dietary.toLowerCase()) ||
+          description.includes(userPreferences.dietary.toLowerCase()));
+
+      const cuisineMatch =
+        userPreferences.favoriteCuisine &&
+        (title.includes(userPreferences.favoriteCuisine.toLowerCase()) ||
+          description.includes(userPreferences.favoriteCuisine.toLowerCase()));
+
+      const includeMatch = userPreferences.includeIngredients
+        ? userPreferences.includeIngredients.some((ing) =>
+            description.includes(ing.toLowerCase())
+          )
+        : true;
+
+      const avoidMatch = userPreferences.avoidIngredients
+        ? !userPreferences.avoidIngredients.some((ing) =>
+            description.includes(ing.toLowerCase())
+          )
+        : true;
+
+      return (dietaryMatch || cuisineMatch) && includeMatch && avoidMatch;
+    });
+  }, [meals, userPreferences]);
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>All Meals</h1>
 
+      {/* AI Recommendations - only show after meals are loaded */}
+      {!loading && recommendedMeals.length > 0 && (
+        <div className={styles.aiContainer}>
+          <AIRecommendations
+            meals={recommendedMeals}
+            userPreferences={userPreferences}
+          />
+        </div>
+      )}
+
       <div className={styles.controls}>
+        {userRole === "host" && (
+          <Link href="/add-meal" className="button">
+            Add a Meal
+          </Link>
+        )}
+
         <div className={styles.searchBox}>
           <input
             type="text"

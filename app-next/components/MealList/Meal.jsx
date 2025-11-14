@@ -24,7 +24,7 @@ const Meal = ({ meal }) => {
   return (
     <div className="meal-card">
       <img
-        src={getImageForMeal(meal.title)}
+        src={meal.image_url || getImageForMeal(meal.title)} // ✅ use uploaded image if exists
         alt={meal.title}
         className="meal-image"
       />
@@ -34,7 +34,7 @@ const Meal = ({ meal }) => {
         </h3>
         <p>{meal.description}</p>
         <p>
-          <strong>Price:</strong> ${meal.price}
+          <strong>Price:</strong> {meal.price} DKK
         </p>
         <p>
           <strong>Location:</strong> {meal.location}

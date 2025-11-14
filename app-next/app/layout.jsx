@@ -1,10 +1,10 @@
 import "./globals.css";
-import NavBar from "@/components/NavBar/NavBar";
+import ClientLayout from "./ClientLayout";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["400"],
 });
 
 export const metadata = {
@@ -20,11 +20,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/images/meals/favicon.ico" />
+        <link rel="icon" href="/images/meals/logo.jpg" />
       </head>
       <body className={poppins.className}>
-        <NavBar />
-        <main>{children}</main>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
