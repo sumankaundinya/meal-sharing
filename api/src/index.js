@@ -9,17 +9,18 @@ import authRouter from "./routers/auth.js";
 import knex from "./database_client.js";
 
 const app = express();
-const port = process.env.PORT || 3001; 
-
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000", 
+    origin: [
+      "http://localhost:3000",
+      "https://mealsharing-app-next.onrender.com",
+    ],
     credentials: true,
   })
 );
-
 
 app.use("/api/auth", authRouter);
 app.use("/api/meals", mealsRouter);
