@@ -15,42 +15,46 @@ const HomePage = async () => {
     cache: "no-store",
   });
 
-  // Later, we’ll fetch the logged-in user
   const user = null;
 
   return (
     <div className={styles.container}>
-      {/* ✅ Hero section */}
       <HomeHero user={user} />
 
       <footer className={styles.footer}>
-        <a href="mailto:info@mealsharing.com">
-          <FaEnvelope className={styles.icon} />
-        </a>
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaFacebookF className={styles.icon} />
-        </a>
-        <a
-          href="https://linkedin.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaLinkedinIn className={styles.icon} />
-        </a>
-        <a href="tel:+1234567890">
-          <FaPhoneAlt className={styles.icon} />
-        </a>
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FaInstagram className={styles.icon} />
-        </a>
+        <div className={styles["icons-row"]}>
+          <a href="mailto:info@mealsharing.com">
+            <FaEnvelope />
+          </a>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebookF />
+          </a>
+          <a
+            href="https://linkedin.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaLinkedinIn />
+          </a>
+          <a href="tel:+1234567890">
+            <FaPhoneAlt />
+          </a>
+          <a
+            href="https://instagram.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaInstagram />
+          </a>
+        </div>
+        <div className={styles.copyright}>
+          © {new Date().getFullYear()} Suman Kumar Kaundinya Jujjuru. All rights
+          reserved.
+        </div>
       </footer>
     </div>
   );

@@ -124,21 +124,35 @@
 
 /* ===== FOOTER ===== */
 .footer {
+  margin-top: 6rem;
   display: flex;
-  justify-content: center;
-  gap: 5rem;
-  margin-top: 8rem;
-  background: transparent;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* space between icons row and copyright */
+  padding: 20px;
 }
 
-.footer a {
-  color: #222;
-  font-size: 1.5rem;
-  transition: color 0.3s ease;
+/* Row for icons */
+.footer .icons-row {
+  display: flex;
+  flex-direction: row; /* icons horizontally */
+  gap: 20px; /* spacing between icons */
 }
 
-.footer a:hover {
+/* Style the icons */
+.footer .icons-row a svg {
   color: #ff6b35;
+  font-size: 1.2rem;
+}
+.footer .icons-row a svg:hover {
+  color: #ff4500;
+}
+
+.footer .copyright {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
 }
 
 /* ===== RESPONSIVE ===== */
