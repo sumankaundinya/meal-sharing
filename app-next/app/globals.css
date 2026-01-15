@@ -5,4 +5,27 @@ body,
   padding: 0;
   height: 100%;
   width: 100%;
+  font-family: "Poppins";
+  background-color: antiquewhite;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Apply to common text elements globally to override module CSS defaults */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button,
+input,
+textarea,
+label {
+  font-family: "Georgia", serif; /* Use serif fallback */
 }

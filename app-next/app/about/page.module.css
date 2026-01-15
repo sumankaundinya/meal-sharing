@@ -1,0 +1,56 @@
+.aboutPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  /* keep background image settings */
+  background-size: cover;
+  background-position: center;
+  padding: 3rem 2rem;
+  color: black; /* optional: for better readability if background is dark */
+}
+
+.aboutContainer {
+  background: none; /* remove card background */
+  padding: 0; /* remove extra padding */
+  border-radius: 0;
+  box-shadow: none; /* remove shadow */
+  max-width: 800px; /* wider layout */
+  text-align: center;
+}
+
+.aboutContainer h1 {
+  margin-bottom: 1rem;
+}
+
+.aboutContainer h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.aboutContainer p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.aboutContainer ul {
+  text-align: left;
+  padding-left: 20px;
+  margin-bottom: 1rem;
+}
+
+.aboutContainer li {
+  margin-bottom: 0.5rem;
+}
+
+.browseLink {
+  color: #ff6b35;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.browseLink:hover {
+  text-decoration: underline;
+}

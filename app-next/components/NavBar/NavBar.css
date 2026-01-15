@@ -1,0 +1,125 @@
+.navbar {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #fcf9f2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  border-radius: 12px;
+}
+
+.navbar-logo {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  width: 36px;
+  height: 36px;
+  margin-right: 0.5rem;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.navbar-logo span {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Desktop nav links */
+.navbar-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #333;
+  font-size: 1rem;
+}
+
+.navbar-links a:hover {
+  color: #ff5722;
+}
+
+.navbar-links a.active {
+  color: #ff5722;
+}
+
+/* Auth buttons and user section */
+.authLinks,
+.userSection {
+  display: flex;
+  align-items: center; /* vertically center text and buttons */
+  gap: 0.75rem; /* spacing between items */
+}
+
+.authLinks .button,
+.userSection .button {
+  font-size: 0.95rem; /* unified font size for all buttons */
+  background-color: #ff6b35;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.authLinks .button:hover,
+.userSection .button:hover {
+  background-color: #ff4500;
+  transform: translateY(-1px);
+}
+
+/* Welcome text */
+.userSection span {
+  font-size: 0.95rem; /* match button font size */
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    background: white;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px;
+    border-radius: 6px;
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    margin: 0.5rem 0;
+    width: 100%;
+  }
+}

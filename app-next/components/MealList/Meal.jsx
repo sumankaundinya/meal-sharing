@@ -24,32 +24,36 @@ const Meal = ({ meal }) => {
   return (
     <div className="meal-card">
       <img
-        src={getImageForMeal(meal.title)}
+        src={meal.image_url || getImageForMeal(meal.title)} // ✅ use uploaded image if exists
         alt={meal.title}
         className="meal-image"
-        style={{
-          width: "100%",
-          height: "auto",
-          marginBottom: "1rem",
-          borderRadius: "8px",
-        }}
       />
-      <h3>
-        <Link href={`/meals/${meal.id}`}>{meal.title}</Link>
-      </h3>
-      <p>{meal.description}</p>
-      <p>
-        <strong>Price:</strong> ${meal.price}
-      </p>
-      <p>
-        <strong>Location:</strong> {meal.location}
-      </p>
-      <p>
-        <strong>When:</strong> {new Date(meal.when_date).toLocaleString()}
-      </p>
-      <p>
-        <strong>Max guests:</strong> {meal.max_reservations}
-      </p>
+      <div className="meal-content">
+        <h3 className="meal-title">
+          <Link href={`/meals/${meal.id}`}>{meal.title}</Link>
+        </h3>
+        <p>{meal.description}</p>
+        <p>
+          <strong>Price:</strong> {meal.price} DKK
+        </p>
+        <p>
+          <strong>Location:</strong> {meal.location}
+        </p>
+        <p>
+          <strong>When:</strong>{" "}
+          {new Date(meal.when_date).toLocaleString("en-GB", {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour12: false,
+          })}
+        </p>
+        <p>
+          <strong>Max guests:</strong> {meal.max_reservations}
+        </p>
+      </div>
     </div>
   );
 };

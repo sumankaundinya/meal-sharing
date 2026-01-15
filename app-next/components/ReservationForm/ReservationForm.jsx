@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import "./ReservationForm.css";
 
 const ReservationForm = ({ mealId, onSuccess }) => {
   const [name, setName] = useState("");
@@ -46,101 +47,51 @@ const ReservationForm = ({ mealId, onSuccess }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        maxWidth: "400px",
-        margin: "2rem auto",
-        padding: "2rem",
-        borderRadius: "8px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        background: "#fff",
-        display: "flex",
-        flexDirection: "column",
-        gap: "1.2rem",
-      }}
-    >
-      <h3 style={{ textAlign: "center", marginBottom: "1rem", color: "#333" }}>
-        Make a Reservation
-      </h3>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-        <label htmlFor="name" style={{ fontWeight: "500", color: "#555" }}>
-          Name:
-        </label>
+    <form className="reservation-form" onSubmit={handleSubmit}>
+      <h3 className="reservation-title">Make a Reservation</h3>
+
+      <div className="reservation-field">
+        <label htmlFor="name">Name:</label>
         <input
           id="name"
           type="text"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{
-            padding: "0.6rem",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-            fontSize: "1rem",
-          }}
         />
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-        <label htmlFor="email" style={{ fontWeight: "500", color: "#555" }}>
-          Email:
-        </label>
+
+      <div className="reservation-field">
+        <label htmlFor="email">Email:</label>
         <input
           id="email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{
-            padding: "0.6rem",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-            fontSize: "1rem",
-          }}
         />
       </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-        <label htmlFor="phone" style={{ fontWeight: "500", color: "#555" }}>
-          Phone:
-        </label>
+
+      <div className="reservation-field">
+        <label htmlFor="phone">Phone:</label>
         <input
           id="phone"
           type="tel"
           required
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          style={{
-            padding: "0.6rem",
-            borderRadius: "4px",
-            border: "1px solid #ccc",
-            fontSize: "1rem",
-          }}
         />
       </div>
-      <button
-        type="submit"
-        style={{
-          padding: "0.8rem",
-          borderRadius: "4px",
-          border: "none",
-          background: "#0070f3",
-          color: "#fff",
-          fontWeight: "600",
-          fontSize: "1rem",
-          cursor: "pointer",
-          transition: "background 0.2s",
-        }}
-      >
+
+      <button type="submit" className="reservation-button">
         Book Seat
       </button>
+
       {message && (
         <p
-          style={{
-            marginTop: "1rem",
-            textAlign: "center",
-            color: message.startsWith("Error") ? "#d32f2f" : "#388e3c",
-            fontWeight: "500",
-          }}
+          className={`reservation-message ${
+            message.startsWith("Error") ? "error" : "success"
+          }`}
         >
           {message}
         </p>

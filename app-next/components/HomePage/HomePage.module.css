@@ -1,0 +1,198 @@
+.container {
+  padding: 2rem;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-y: auto;
+}
+
+/* ===== HERO CONTAINER (holds header + 2 cards) ===== */
+.heroContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 0rem;
+  flex-wrap: wrap; /* ensures responsive stacking */
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== HEADER (Left side) ===== */
+.header {
+  flex: 1;
+  text-align: left;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.header h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  font-family: "Pacifico", cursive;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* ===== HERO CARDS ===== */
+.heroCard {
+  flex: 1;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.heroCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.heroImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.heroCard h2 {
+  font-family: "Poppins";
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #222;
+  margin: 1rem 0 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+.heroCard p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.heroButton {
+  background-color: #ff7043;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.heroButton:hover {
+  background-color: #ff5722;
+  transform: scale(1.05);
+}
+
+/* ===== SEE ALL MEALS BUTTON ===== */
+.seeAllMeals {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.seeAllMealsButton {
+  background-color: #ff6b35;
+  border: none;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-bottom: 1.5rem;
+}
+
+.seeAllMealsButton:hover {
+  background-color: #ff4500;
+  transform: scale(1.05);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* space between icons row and copyright */
+  padding: 20px;
+}
+
+/* Row for icons */
+.footer .icons-row {
+  display: flex;
+  flex-direction: row; /* icons horizontally */
+  gap: 20px; /* spacing between icons */
+}
+
+/* Style the icons */
+.footer .icons-row a svg {
+  color: #ff6b35;
+  font-size: 1.2rem;
+}
+.footer .icons-row a svg:hover {
+  color: #ff4500;
+}
+
+.footer .copyright {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ===== RESPONSIVE ===== */
+@media screen and (max-width: 900px) {
+  .heroContainer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .heroCard {
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .header h1 {
+    font-size: 1.6rem;
+  }
+
+  .seeAllMealsButton {
+    width: 100%;
+    max-width: 300px;
+    font-size: 0.95rem;
+  }
+
+  .footer {
+    gap: 1rem;
+  }
+
+  .footer a {
+    font-size: 1.3rem;
+  }
+}

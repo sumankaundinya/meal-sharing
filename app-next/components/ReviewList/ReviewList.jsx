@@ -1,9 +1,37 @@
 "use client";
 import { useEffect, useState } from "react";
+import "./ReviewList.css";
 
 const ReviewList = ({ mealId }) => {
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const renderStars = (count) => "⭐️".repeat(count);
+
+  // Handle delete
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this review?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/reviews/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to delete review");
+
+      // Remove deleted review from state
+      setReviews((prev) => prev.filter((r) => r.id !== id));
+    } catch (err) {
+      console.error("Error deleting review:", err);
+      alert("Failed to delete review.");
+    }
+  };
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -27,36 +55,25 @@ const ReviewList = ({ mealId }) => {
   if (reviews.length === 0) return <p>No reviews yet.</p>;
 
   return (
-    <div style={{ marginTop: "2rem" }}>
-      <h3 style={{ marginBottom: "1rem" }}>Reviews</h3>
-      <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+    <div className="review-list-container">
+      <h3 className="review-list-title">Reviews</h3>
+      <ul className="review-list">
         {reviews.map((review, idx) => (
           <li
             key={review.id}
-            style={{
-              display: "flex",
-              flexDirection: idx % 2 === 0 ? "row" : "row-reverse",
-              alignItems: "flex-start",
-              marginBottom: "1.5rem",
-            }}
+            className={`review-item ${
+              idx % 2 === 0 ? "row-normal" : "row-reverse"
+            }`}
           >
-            <div
-              style={{
-                background: "#f9f9f9",
-                borderRadius: "8px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-                padding: "1rem",
-                minWidth: "220px",
-                maxWidth: "350px",
-                border: "1px solid #eee",
-              }}
-            >
-              <p style={{ margin: 0, fontWeight: "bold", color: "#ff9800" }}>
-                {review.rating} stars
-              </p>
-              <p style={{ margin: "0.5rem 0 0 0", color: "#333" }}>
-                {review.comment}
-              </p>
+            <div className="review-card">
+              <p className="review-comment">{review.comment}</p>
+              <p className="review-rating">{renderStars(review.rating)}</p>
+              <button
+                className="delete-review-button"
+                onClick={() => handleDelete(review.id)}
+              >
+                Delete
+              </button>
             </div>
           </li>
         ))}

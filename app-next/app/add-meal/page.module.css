@@ -1,0 +1,90 @@
+.addMealContainer {
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.addMealContainer h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.addMealForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.addMealForm input,
+.addMealForm textarea {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.addMealForm input:focus,
+.addMealForm textarea:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 4px rgba(0, 112, 243, 0.3);
+}
+
+.addMealForm button {
+  padding: 0.8rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.addMealForm button:hover {
+  background-color: #005bb5;
+}
+
+.addMealMessage {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.addMealMessage.success {
+  color: green;
+}
+
+.addMealMessage.error {
+  color: red;
+}
+.aiDescriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.aiButton {
+  align-self: flex-start;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.aiButton:hover {
+  background-color: #5848d6;
+}
+
+.aiButton:disabled {
+  background-color: #bbb;
+  cursor: not-allowed;
+}

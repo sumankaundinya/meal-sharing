@@ -63,8 +63,32 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", validate(mealSchema), async (req, res) => {
+  console.log("POST /meals body:", req.body);
   try {
-    const [id] = await knex("meal").insert(req.validatedBody);
+    const mealData = req.validatedBody;
+
+    const {
+      title,
+      description,
+      location,
+      when_date,
+      max_reservations,
+      price,
+      image_url,
+      host_id,
+    } = mealData;
+
+    const [id] = await knex("meal").insert({
+      title,
+      description,
+      location,
+      when_date,
+      max_reservations,
+      price,
+      image_url,
+      host_id,
+    });
+
     res.status(201).json({ message: "Meal created", id });
   } catch (error) {
     console.error("Error creating meal:", error);
@@ -126,6 +150,17 @@ router.delete("/:id", async (req, res) => {
   } catch (error) {
     console.error("Error deleting meal:", error);
     res.status(500).json({ error: "Failed to delete meal" });
+  }
+});
+// GET /api/meals/host/:hostId
+router.get("/host/:hostId", async (req, res) => {
+  try {
+    const { hostId } = req.params;
+    const meals = await knex("Meal").where({ host_id: hostId });
+    res.json(meals);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error fetching host meals." });
   }
 });
 

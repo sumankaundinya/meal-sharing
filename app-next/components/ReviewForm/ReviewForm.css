@@ -1,0 +1,76 @@
+.review-form {
+  margin-top: 2rem;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.review-title {
+  margin: 0;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.review-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.review-field label {
+  font-weight: 500;
+  color: #444;
+}
+
+.review-field textarea {
+  resize: vertical;
+  min-height: 60px;
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+}
+
+.review-field input {
+  width: 80px;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+}
+
+.review-button {
+  background: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.review-button:hover {
+  background: #005bb5;
+}
+
+.review-status {
+  margin: 0;
+  font-weight: 500;
+}
+
+.review-status.success {
+  color: #388e3c;
+}
+
+.review-status.error {
+  color: #d32f2f;
+}
